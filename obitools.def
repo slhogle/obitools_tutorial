@@ -1,0 +1,30 @@
+BootStrap: library
+From: ubuntu:20.04
+
+%post
+    apt-get -y install software-properties-common
+    apt-get -y --no-install-recommends install apt-utils
+    add-apt-repository universe
+    apt-get -y update
+    apt-get -y install python2 python2-dev wget gcc
+    
+    # install pip
+    cd /usr/local/src/
+    wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py
+    python2 get-pip.py
+    
+    # install obitools using pip
+    pip2 install virtualenv
+    pip2 install --upgrade 'pygments==2.5.2'
+    pip2 install --upgrade 'sphinx==1.4.9'
+    pip2 install OBITools
+
+%environment
+
+%runscript
+exec "$@"
+
+%test
+
+%labels
+    Author SLHogle
