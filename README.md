@@ -1,3 +1,28 @@
+# Getting started
+Here is a quick intro to CSC Puhti. Generally, the CSC docs are good and most of what you will need is clearly documented. [Quick Start](https://docs.csc.fi/support/tutorials/puhti_quick/)
+
+If you are unfamiliar with Linux/Unix based tools and the command line in generally I strongly suggest that you read through the [introduction to linux tutorials](https://docs.csc.fi/support/tutorials/env-guide/overview/) on the CSC Docs website.
+
+# Log in to CSC Puhti and get the obitools singularity container
+We're using a containerized version of the obitools for ease and simplicitiy. These are packaged using [`Singularity`](https://sylabs.io/) which is like Docker but better. There are good tutorials for using Singularity [here](https://sylabs.io/guides/3.5/user-guide/) and also [here](https://singularity-tutorial.github.io/).
+
+Login
+```{bash}
+ssh username@puhti.csc.fi
+```
+
+Download Obitools image
+```{bash}
+singularity pull obitools.sif library://slhogle/base/obitools:latest
+```
+
+Check that it worked. You should see that the key was signed by Shane Hogle.
+```{bash}
+singularity exec obitools_latest.sif illuminapairedend
+```
+Should return: `No Entry to process` which is what we want. You can skip to the tutorial section at the bottom to put some real data through the pipeline and verify that things work. Generally, you just run the obitools commands the same as you would otherwise except you prefix each one with `singularity exec obitools.sif`.
+
+
 # Running singularity containers on CSC Puhti
 [General explanation for running with batch script](https://docs.csc.fi/computing/containers/run-existing/)
 
