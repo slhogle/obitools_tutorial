@@ -1,3 +1,39 @@
+# Running singularity containers on CSC Puhti
+[General explanation for running with batch script](https://docs.csc.fi/computing/containers/run-existing/)
+
+Obitools does not seem like it is multithreaded so you can run it just as well using an interactive shell on Puhti. [Here is an intro to interactive shell usage](https://docs.csc.fi/computing/running/interactive-usage/).
+
+I would run like:
+```{bash}
+sinteractive --account project_2011234 --time 48:00:00 --mem 8000 --tmp 100
+```
+Then use obitool commands as usual. If you are want to run in interactive while you exit your remote session you can use sinteractive in a screen instance.
+
+```
+# take note of the login node you are currently on. 
+# You will need the node number suffix (1 or 2) to reattach to your 
+# specific screen session
+screen -S myobitools
+
+sinteractive --account project_2011234 --time 24:00:00 --mem 8000 --tmp 100
+
+[run your obitool commands here]
+```
+Now you can exit from your screen session while obitools runs in the background. Press `Ctrl-a d` to detach from the screen.
+
+You can even exit your ssh session on puhti. When you want to come back do where the login node is either 1 or 2 which you noted above:
+
+```
+ssh username@puhti-login[1|2].csc.fi
+```
+Now reattach your screen session:
+
+```
+screen -R myobitools
+```
+
+Now you see where you left off.
+
 # Obitools Tutorial
 This is really just to verify that I had this working correctly in a singularity container. The tutorial is taken from [here](https://pythonhosted.org/OBITools/wolves.html)
 
